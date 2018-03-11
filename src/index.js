@@ -1,5 +1,4 @@
-//module.exports =
-    function longestConsecutiveLength(array) {
+module.exports =function longestConsecutiveLength(array) {
 
     if (array.length == 0){
         return 0;
@@ -10,17 +9,24 @@
     array.sort(function(left,right){ return left-right;});
 
     var colConsecutive = 1;
+    var arrayColConsecutive = new Array();
 
-    for(i = 0; i<array.length; i++){
-        
+    for(var i = 0; i<array.length; i++) {
+        if (array[i] - array[i - 1] == 1) {
+            colConsecutive++;
+        }else if(array[i] - array[i - 1] > 1){
+            arrayColConsecutive.push(colConsecutive);
+            colConsecutive = 1;
 
+        }
     }
 
-    return array;
+    var numberOf = getMaxOfArray(arrayColConsecutive);
+
+    return numberOf;
 
 }
 
-var array = [100, 4, 200, 1, 3, 2];
-const length = longestConsecutiveLength(array);
-
-console.log(length);
+function getMaxOfArray(numArray) {
+    return Math.max.apply(null, numArray);
+}
